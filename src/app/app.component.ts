@@ -1,8 +1,11 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Sidebar} from "primeng/sidebar";
 import {ApiRequesterService} from "./services/http/ApiRequesterService";
-import {Observable, Subject, takeUntil} from "rxjs";
+import {catchError, Observable, Subject, takeUntil} from "rxjs";
 import {ZonesDefinition} from "./models/zone-definition.model";
+import {ApplicationStateService} from "./services/ApplicationStateService";
+import {ApplicationRequester} from "./models/ApplicationRequester";
+import {MessageService} from "primeng/api";
 
 type SearchItem = {
   name: string;
@@ -22,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy{
   selectedSearch: SearchItem | null = null;
   selectedSearchValue: string | null = null;
   private readonly destroy$ = new Subject();
+  private data$: Observable<ZonesDefinition>= new Observable<ZonesDefinition>();
   public zones: ZonesDefinition = {
     zones: {
       type: "zones",
@@ -41,7 +45,8 @@ export class AppComponent implements OnInit, OnDestroy{
     }
   };
 
-  constructor(private apiService: ApiRequesterService) {
+  constructor(private apiService: ApiRequesterService,
+              private applicationStateService: ApplicationStateService) {
   }
 
   private clearZones() {
@@ -78,10 +83,19 @@ export class AppComponent implements OnInit, OnDestroy{
       { name: 'Locations', code: 'loc' }
     ];
     this.apiService.FetchData().pipe(
-      takeUntil(this.destroy$)
+      takeUntil(this.destroy$),
     ).subscribe((data)=> {
       this.clearZones()
       this.zones = data;
     });
+    this.applicationStateService.messages.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((message: ApplicationRequester) => {
+      if (message.autoRetry) {
+        this.applicationStateService.SetTimeout(5000).pipe().subscribe(() => {
+          this.apiService.FetchData();
+        })
+      }
+    })
   }
 }

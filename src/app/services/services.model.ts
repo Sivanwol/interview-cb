@@ -2,6 +2,8 @@ import { NgModule} from "@angular/core";
 import {ApiRequesterService} from "./http/ApiRequesterService";
 import {HttpClientModule} from "@angular/common/http";
 import {BasicHttpInterceptorProviders} from "./http/BasicHttpInterceptorProviders";
+import {ApplicationStateService} from "./ApplicationStateService";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [],
@@ -10,6 +12,8 @@ import {BasicHttpInterceptorProviders} from "./http/BasicHttpInterceptorProvider
   ],
   providers: [
     BasicHttpInterceptorProviders,
+    ApplicationStateService,
+    MessageService,
     ApiRequesterService
   ]
 })

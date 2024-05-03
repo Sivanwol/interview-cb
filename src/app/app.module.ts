@@ -15,6 +15,7 @@ import {AvatarModule} from "primeng/avatar";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {ServicesModule} from "./services/services.model";
+import {ToastModule} from "primeng/toast";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ButtonModule,
     AvatarModule,
     DropdownModule,
+    ToastModule,
     InputTextModule
   ],
   bootstrap: [AppComponent]

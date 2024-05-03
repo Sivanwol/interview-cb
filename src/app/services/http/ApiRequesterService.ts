@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, Observable, retry, switchMap, throwError} from "rxjs";
 import {ZoneDefinition, ZonesDefinition} from "../../models/zone-definition.model";
+import {ApplicationStateService} from "../ApplicationStateService";
+import {MessageService} from "primeng/api";
 
 
 @Injectable()
@@ -12,11 +14,13 @@ export class ApiRequesterService {
     }),
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private appStateService: ApplicationStateService,
+              private messageService: MessageService) {
   }
 
   public FetchData(): Observable<ZonesDefinition> {
-    const call =  this.http.get('data').pipe(retry(1), catchError(this.handleError));
+    const call =  this.http.get('data').pipe(retry(1), catchError(this.handleError.bind(this)));
     return call.pipe(map((data: any, index) => {
       const zones = data.find((tt: ZoneDefinition) => tt.type === "zones")!;
       const sites = data.find((tt: ZoneDefinition) => tt.type === "sites")!;
@@ -42,9 +46,16 @@ export class ApiRequesterService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
+    const requesterId = error.headers.get('request-id');
+    this.appStateService.SetApiServiceFailed({
+      requesterId,
+      message: errorMessage,
+      autoRetry: false
+    });
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed with request', life: 20000 })
     return throwError(() => {
       return errorMessage;
     });
   }
+
 }
