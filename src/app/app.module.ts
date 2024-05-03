@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {importProvidersFrom, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -14,6 +14,7 @@ import {ButtonModule} from "primeng/button";
 import {AvatarModule} from "primeng/avatar";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
+import {ServicesModule} from "./services/services.model";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    ServicesModule,
     ZoneModule,
     SidebarModule,
     ButtonModule,
@@ -45,7 +47,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     DropdownModule,
     InputTextModule
   ],
-  providers: [],
+  providers: [
+    importProvidersFrom(HttpClientModule),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

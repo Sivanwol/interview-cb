@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
 import {Location} from "../../models/location.model";
 
 @Component({
   selector: "app-zone",
   templateUrl: "./zone.component.html",
-  styleUrls: ["./zone.component.scss"]
+  styleUrls: ["./zone.component.scss"],
 })
 export class ZoneComponent  implements OnInit {
   @Input() name: string = "";

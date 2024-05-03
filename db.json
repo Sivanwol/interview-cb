@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "type": "zones",
+      "items": [
+        {
+          "name": "zone 1",
+          "translationKey": "",
+          "items": [
+            {
+              "name": "sensor 1",
+              "isConnect": true,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 2",
+              "isConnect": true,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 3",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 4",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            }
+          ]
+        },
+        {
+          "name": "zone 2",
+          "translationKey": "",
+          "items": [
+            {
+              "name": "sensor 1",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 2",
+              "isConnect": true,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 3",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 4",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sites",
+      "items": [
+        {
+          "name": "Site 1",
+          "translationKey": "",
+          "items": [
+            {
+              "name": "sensor 1",
+              "isConnect": true,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 2",
+              "isConnect": true,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 3",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 4",
+              "isConnect": false,
+              "icon": "pi-",
+              "translationKey": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "places",
+      "items": []
+    },
+    {
+      "type": "layers",
+      "items": []
+    }
+  ]
+}

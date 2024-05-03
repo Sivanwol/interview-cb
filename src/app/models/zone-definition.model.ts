@@ -1,8 +1,12 @@
 import {Location} from "./location.model";
-
 export type ZoneDefinition = {
-  zones: Location[],
-  sites: Location[],
-  placeMarks: Location[],
-  layers: Location[],
+  type: string,
+  items: Location[]
+}
+
+export type ZonesDefinition = {
+  zones: ZoneDefinition,
+  sites: ZoneDefinition,
+  placesMarks: ZoneDefinition,
+  layers: ZoneDefinition,
 }

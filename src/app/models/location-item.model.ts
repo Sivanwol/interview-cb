@@ -1,8 +1,6 @@
 export type LocationItem = {
-  id: string;
   name: string;
-  description: string;
-  connectionStatus: string;
+  isConnect: boolean;
   icon: string;
   translationKey: string;
 }
