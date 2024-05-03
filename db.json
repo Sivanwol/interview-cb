@@ -4,61 +4,87 @@
       "type": "zones",
       "items": [
         {
-          "name": "zone 1",
+          "name": "sensors area 1",
+          "icon": "pi-amazon",
           "translationKey": "",
           "items": [
             {
               "name": "sensor 1",
               "isConnect": true,
-              "icon": "pi-",
+              "isWired": true,
+              "isBufferedConnection": true,
+              "icon": "pi-amazon",
               "translationKey": ""
             },
             {
               "name": "sensor 2",
               "isConnect": true,
-              "icon": "pi-",
+              "isWired": true,
+              "isBufferedConnection": true,
+              "icon": "pi-amazon",
+              "translationKey": ""
+            },
+            {
+              "name": "sensor 2",
+              "isConnect": true,
+              "isWired": true,
+              "isBufferedConnection": false,
+              "icon": "pi-amazon",
               "translationKey": ""
             },
             {
               "name": "sensor 3",
               "isConnect": false,
-              "icon": "pi-",
+              "isWired": false,
+              "isBufferedConnection": false,
+              "icon": "pi-amazon",
               "translationKey": ""
             },
             {
               "name": "sensor 4",
               "isConnect": false,
-              "icon": "pi-",
+              "isBufferedConnection": false,
+              "isWired": false,
+              "icon": "pi-amazon",
               "translationKey": ""
             }
           ]
         },
         {
-          "name": "zone 2",
+          "name": "sensors area 2",
+          "icon": "pi-apple",
           "translationKey": "",
           "items": [
             {
               "name": "sensor 1",
               "isConnect": false,
-              "icon": "pi-",
+              "isBufferedConnection": false,
+              "isWired": false,
+              "icon": "pi-apple",
               "translationKey": ""
             },
             {
               "name": "sensor 2",
               "isConnect": true,
-              "icon": "pi-",
+              "isBufferedConnection": false,
+              "isWired": true,
+              "icon": "pi-apple",
               "translationKey": ""
             },
             {
               "name": "sensor 3",
-              "isConnect": false,
-              "icon": "pi-",
+              "isConnect": true,
+              "isBufferedConnection": true,
+              "isWired": true,
+              "icon": "pi-apple",
               "translationKey": ""
             },
             {
               "name": "sensor 4",
-              "isConnect": false,
-              "icon": "pi-",
+              "isConnect": true,
+              "isBufferedConnection": true,
+              "isWired": true,
+              "icon": "pi-apple",
               "translationKey": ""
             }
           ]
@@ -67,6 +93,8 @@
     },
     {
       "type": "sites",
+      "icon": "pi-bitcoin",
+      "translationKey": "",
       "items": [
         {
           "name": "Site 1",
@@ -75,25 +103,33 @@
             {
               "name": "sensor 1",
               "isConnect": true,
-              "icon": "pi-",
+              "isBufferedConnection": true,
+              "isWired": true,
+              "icon": "pi-apple",
               "translationKey": ""
             },
             {
               "name": "sensor 2",
               "isConnect": true,
-              "icon": "pi-",
+              "isBufferedConnection": false,
+              "isWired": true,
+              "icon": "pi-apple",
               "translationKey": ""
             },
             {
               "name": "sensor 3",
-              "isConnect": false,
-              "icon": "pi-",
+              "isConnect": true,
+              "isBufferedConnection": true,
+              "isWired": true,
+              "icon": "pi-apple",
               "translationKey": ""
             },
             {
               "name": "sensor 4",
               "isConnect": false,
-              "icon": "pi-",
+              "isBufferedConnection": false,
+              "isWired": false,
+              "icon": "pi-apple",
               "translationKey": ""
             }
           ]

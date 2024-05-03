@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Sidebar} from "primeng/sidebar";
 import {ApiRequesterService} from "./services/http/ApiRequesterService";
 import {catchError, Observable, Subject, takeUntil} from "rxjs";
@@ -46,7 +46,8 @@ export class AppComponent implements OnInit, OnDestroy{
   };
 
   constructor(private apiService: ApiRequesterService,
-              private applicationStateService: ApplicationStateService) {
+              private applicationStateService: ApplicationStateService,
+              private ref: ChangeDetectorRef) {
   }
 
   private clearZones() {
@@ -80,13 +81,17 @@ export class AppComponent implements OnInit, OnDestroy{
     this.searchItems =  [
       { name: 'Places', code: 'pm' },
       { name: 'Zones', code: 'zone' },
-      { name: 'Locations', code: 'loc' }
+      { name: 'Locations', code: 'loc' },
+      { name: 'Layers', code: 'layers' }
     ];
     this.apiService.FetchData().pipe(
       takeUntil(this.destroy$),
     ).subscribe((data)=> {
       this.clearZones()
       this.data = data;
+
+      console.log(this.data);
+      this.ref.markForCheck();
     });
     this.applicationStateService.messages.pipe(
       takeUntil(this.destroy$)

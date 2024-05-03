@@ -7,8 +7,8 @@ import {SharedModule} from "../shared/shared.module";
 import {MenuModule} from "primeng/menu";
 import {AccordionModule} from "primeng/accordion";
 import {ZoneLocationItemComponent} from "./location-item.component";
-import {ListboxModule} from "primeng/listbox";
 import {BadgeModule} from "primeng/badge";
+import {TreeModule} from "primeng/tree";
 
 @NgModule({
   imports: [
@@ -17,9 +17,9 @@ import {BadgeModule} from "primeng/badge";
     PanelModule,
     AvatarModule,
     AccordionModule,
-    ListboxModule,
     MenuModule,
-    BadgeModule
+    BadgeModule,
+    TreeModule
   ],
   declarations: [ZoneComponent,ZoneLocationItemComponent],
   exports: [ZoneComponent],
