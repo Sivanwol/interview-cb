@@ -6,20 +6,19 @@
         <span class="font-bold">{{ name }}</span>
       </div>
     </ng-template>
-    <p-panel header="Sensors" [toggleable]="true">
-        <p-tree
-          class="w-full md:w-30rem"
-          selectionMode="checkbox"
-          [(selection)]="selectedFiles"
-          [value]="items">
-          <ng-template let-node pTemplate="url">
-            <div class="flex flex-wrap p-2 align-items-center gap-3 w-full">
-              <p class="m-0">
-                <app-zone-location-item [location]="node.items"/>
-              </p>
-            </div>
-          </ng-template>
-        </p-tree>
-    </p-panel>
+    <p-tree
+      class="w-full md:w-30rem"
+      selectionMode="checkbox"
+      [(selection)]="selectedFiles"
+      [value]="treeNodes">
+      <ng-template let-node pTemplate="location-item">
+        <p class="m-0">
+          <app-zone-location-item [location]="node.data"/>
+        </p>
+      </ng-template>
+      <ng-template let-node pTemplate="default">
+        <b>{{ node.label }}</b>
+      </ng-template>
+    </p-tree>
   </p-panel>
 </div>

@@ -1,5 +1,4 @@
 <div class="flex align-items-center gap-2">
-  <i class="pii {{location.icon}}"></i>
   <div>{{location.name}}</div>
   <div *ngIf="location.isWired">
     <p-badge severity="danger" value="No Connection" *ngIf="!location.isConnect" />

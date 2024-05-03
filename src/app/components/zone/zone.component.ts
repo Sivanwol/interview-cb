@@ -17,26 +17,30 @@ export class ZoneComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.items.length > 0) {
-      this.items.forEach(item => {
+      let index =1;
+      for (const item of this.items) {
         const node: TreeNode = {
-          key: uuid(),
-          icon: item.icon,
-          data: item,
+          key: `${index}`,
+          // icon: item.icon,
           label: item.name,
           children: []
         }
-        this.items.forEach(tItem => {
+        let tIndex = 1;
+        for (const tItem of item.items) {
           const childNode: TreeNode = {
-            key: uuid(),
+            key: `${index}-${tIndex}`,
             icon: tItem.icon,
             data: tItem,
             label: tItem.name,
+            type: 'location-item',
             children: []
           };
           node.children!.push(childNode);
-        })
+          tIndex++;
+        }
+        index++;
         this.treeNodes.push(node);
-      })
+      }
 
     }
     console.log(this.treeNodes);

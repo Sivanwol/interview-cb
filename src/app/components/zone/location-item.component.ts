@@ -7,15 +7,9 @@ import {LocationItem} from "../../models/location-item.model";
   styleUrls: ['./location-item.component.scss'],
 })
 export class ZoneLocationItemComponent   implements OnInit {
-    @Input() public location: LocationItem = {
-      translationKey: '',
-      name: '',
-      icon: '',
-      isWired: false,
-      isBufferedConnection: false,
-      isConnect: false
-    }
+    @Input() public location!: LocationItem
     ngOnInit(): void {
+      console.log(this.location)
     }
 
 }

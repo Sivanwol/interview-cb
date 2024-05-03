@@ -105,7 +105,7 @@
               "isConnect": true,
               "isBufferedConnection": true,
               "isWired": true,
-              "icon": "pi-apple",
+              "icon": "pi-bitcoin",
               "translationKey": ""
             },
             {
@@ -113,7 +113,7 @@
               "isConnect": true,
               "isBufferedConnection": false,
               "isWired": true,
-              "icon": "pi-apple",
+              "icon": "pi-bitcoin",
               "translationKey": ""
             },
             {
@@ -121,7 +121,7 @@
               "isConnect": true,
               "isBufferedConnection": true,
               "isWired": true,
-              "icon": "pi-apple",
+              "icon": "pi-bitcoin",
               "translationKey": ""
             },
             {
@@ -129,7 +129,7 @@
               "isConnect": false,
               "isBufferedConnection": false,
               "isWired": false,
-              "icon": "pi-apple",
+              "icon": "pi-bitcoin",
               "translationKey": ""
             }
           ]
