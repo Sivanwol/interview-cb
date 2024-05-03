@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
-  private API_URL: string = 'http://localhost:3000/';
+  private API_URL: string = 'http://localhost:3000';
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const apiReq = req.clone({ url: `${this.API_URL}/${req.url}` });

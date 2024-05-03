@@ -11,9 +11,6 @@ import {BasicHttpInterceptorProviders} from "./http/BasicHttpInterceptorProvider
   providers: [
     BasicHttpInterceptorProviders,
     ApiRequesterService
-  ],
-  exports: [
-    ApiRequesterService
   ]
 })
 export class ServicesModule { }

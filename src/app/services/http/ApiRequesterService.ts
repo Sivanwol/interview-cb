@@ -18,10 +18,10 @@ export class ApiRequesterService {
   public FetchData(): Observable<ZonesDefinition> {
     const call =  this.http.get('data').pipe(retry(1), catchError(this.handleError));
     return call.pipe(map((data: any, index) => {
-      const zones = data.items.find((tt: ZoneDefinition) => tt.type === "zones")!;
-      const sites = data.items.find((tt: ZoneDefinition) => tt.type === "sites")!;
-      const placesMarks = data.items.find((tt: ZoneDefinition) => tt.type === "places")!;
-      const layers = data.items.find((tt: ZoneDefinition) => tt.type === "layers")!;
+      const zones = data.find((tt: ZoneDefinition) => tt.type === "zones")!;
+      const sites = data.find((tt: ZoneDefinition) => tt.type === "sites")!;
+      const placesMarks = data.find((tt: ZoneDefinition) => tt.type === "places")!;
+      const layers = data.find((tt: ZoneDefinition) => tt.type === "layers")!;
       const zoneDef: ZonesDefinition = {
         zones,
         sites,

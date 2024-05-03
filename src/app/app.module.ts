@@ -47,9 +47,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     DropdownModule,
     InputTextModule
   ],
-  providers: [
-    importProvidersFrom(HttpClientModule),
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
