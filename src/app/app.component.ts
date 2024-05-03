@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, OnDestroy{
   selectedSearch: SearchItem | null = null;
   selectedSearchValue: string | null = null;
   private readonly destroy$ = new Subject();
-  private data$: Observable<ZonesDefinition>= new Observable<ZonesDefinition>();
   public data: ZonesDefinition = {
     zones: {
       type: "zones",
