@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy{
   selectedSearchValue: string | null = null;
   private readonly destroy$ = new Subject();
   private data$: Observable<ZonesDefinition>= new Observable<ZonesDefinition>();
-  public zones: ZonesDefinition = {
+  public data: ZonesDefinition = {
     zones: {
       type: "zones",
       items: []
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   private clearZones() {
-    this.zones = {
+    this.data = {
       zones: {
         type: "zones",
         items: []
@@ -86,13 +86,16 @@ export class AppComponent implements OnInit, OnDestroy{
       takeUntil(this.destroy$),
     ).subscribe((data)=> {
       this.clearZones()
-      this.zones = data;
+      this.data = data;
     });
     this.applicationStateService.messages.pipe(
       takeUntil(this.destroy$)
     ).subscribe((message: ApplicationRequester) => {
       if (message.autoRetry) {
-        this.applicationStateService.SetTimeout(5000).pipe().subscribe(() => {
+        this.applicationStateService.SetTimeout(5000).pipe(
+          takeUntil(this.destroy$)
+        ).subscribe(() => {
+          console.log("reload")
           this.apiService.FetchData();
         })
       }

@@ -5,6 +5,10 @@ import {ButtonModule} from "primeng/button";
 import {ZoneComponent} from "./zone.component";
 import {SharedModule} from "../shared/shared.module";
 import {MenuModule} from "primeng/menu";
+import {AccordionModule} from "primeng/accordion";
+import {ZoneLocationItemComponent} from "./location-item.component";
+import {ListboxModule} from "primeng/listbox";
+import {BadgeModule} from "primeng/badge";
 
 @NgModule({
   imports: [
@@ -12,9 +16,12 @@ import {MenuModule} from "primeng/menu";
     ButtonModule,
     PanelModule,
     AvatarModule,
-    MenuModule
+    AccordionModule,
+    ListboxModule,
+    MenuModule,
+    BadgeModule
   ],
-  declarations: [ZoneComponent],
+  declarations: [ZoneComponent,ZoneLocationItemComponent],
   exports: [ZoneComponent],
 })
 export class ZoneModule {}
