@@ -10,6 +10,7 @@
       class="w-full md:w-30rem"
       selectionMode="checkbox"
       [(selection)]="selectedFiles"
+      [emptyMessage]="'No Objects Loaded'"
       [value]="treeNodes">
       <ng-template let-node pTemplate="location-item">
         <p class="m-0">

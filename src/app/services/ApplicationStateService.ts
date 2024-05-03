@@ -5,9 +5,17 @@ import {ZonesDefinition} from "../models/zone-definition.model";
 
 @Injectable()
 export class ApplicationStateService {
-  private data$: Observable<ZonesDefinition>= new Observable<ZonesDefinition>();
   private message$ : Subject<ApplicationRequester> = new Subject<ApplicationRequester>();
   public messages : Observable<ApplicationRequester> = this.message$.asObservable();
+
+  private loading$: Subject<boolean> = new Subject<boolean>();
+
+  public GetLoadingState$: Observable<boolean> = this.loading$.asObservable();
+
+
+  public SetLoadingState(status: boolean) {
+    this.loading$.next(status);
+  }
   public SetApiServiceFailed(request: ApplicationRequester): void {
     this.message$.next(request);
   }

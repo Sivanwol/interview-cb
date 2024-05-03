@@ -1,6 +1,6 @@
 import {importProvidersFrom, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {ServicesModule} from "./services/services.model";
 import {ToastModule} from "primeng/toast";
+import {RippleModule} from "primeng/ripple";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -31,6 +32,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
 
@@ -47,7 +49,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AvatarModule,
     DropdownModule,
     ToastModule,
-    InputTextModule
+    InputTextModule,
+    RippleModule
   ],
   bootstrap: [AppComponent]
 })

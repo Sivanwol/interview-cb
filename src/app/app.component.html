@@ -23,14 +23,17 @@
             <p-button type="button" (click)="closeCallback($event)" icon="pi pi-times" rounded="true"
                       outlined="true" styleClass="h-2rem w-2rem"></p-button>
           </div>
-          <div class="overflow-y-auto">
-
-            <div class="flex align-items-center px-4 pt-3 flex-shrink-0">
-              <p-dropdown [options]="searchItems" [(ngModel)]="selectedSearch" optionLabel="name" [showClear]="true"
-                          placeholder="Select a Object Type"></p-dropdown>
-              |
-              <input type="text" pInputText [(ngModel)]="selectedSearchValue"/>
-            </div>
+          <div class="overflow-y-auto" >
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+              <div class="flex align-items-center px-4 pt-3 flex-shrink-0">
+                <p-dropdown [options]="searchItems" formControlName="searchGroupSelect" optionLabel="name"
+                            placeholder="Select a Object Type"></p-dropdown>
+                |
+                <input type="text" pInputText formControlName="searchText"/>
+                <p-button type="submit" pRipple [disabled]="!searchForm.valid">search</p-button>
+                <p-button type="reset" (click)="onReset" pRipple>search</p-button>
+              </div>
+            </form>
             <ul class="list-none p-0 m-0 overflow-hidden">
               <li>
                 <app-zone pRipple
