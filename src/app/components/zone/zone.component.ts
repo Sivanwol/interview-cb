@@ -18,6 +18,7 @@ export class ZoneComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.items.length > 0) {
       let index =1;
+      this.treeNodes = [];
       for (const item of this.items) {
         const node: TreeNode = {
           key: `${index}`,

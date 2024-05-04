@@ -19,7 +19,7 @@ type SearchItem = {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit, OnDestroy {
   title = 'Angular 17 Crud example';
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
   sidebarVisible: boolean = true;
@@ -51,10 +51,11 @@ export class AppComponent implements OnInit, OnDestroy{
     searchGroupSelect: [null, Validators.required],
     searchText: ["", Validators.required],
   })
+
   constructor(private apiService: ApiRequesterService,
               private applicationStateService: ApplicationStateService,
               private ref: ChangeDetectorRef,
-              public zoneDefinitionService:ZoneDefinitionService,
+              public zoneDefinitionService: ZoneDefinitionService,
               private formBuilder: FormBuilder) {
   }
 
@@ -78,43 +79,51 @@ export class AppComponent implements OnInit, OnDestroy{
       }
     };
   }
+
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.complete();
-    }
+    console.log("Killed")
+  }
+
   closeCallback(e: any): void {
     this.sidebarRef.close(e);
   }
+
   onSubmit() {
     if (this.searchForm.valid) {
       console.log(this.searchForm.value);
-      const selectedSearchValue: {name:string, code:string } = this.searchForm.value as {name:string, code:string };
-      this.zoneDefinitionService.FilterData( selectedSearchValue , this.searchForm.value.searchText! as string)
+      this.zoneDefinitionService.FilterData(this.searchForm.value.searchGroupSelect!, this.searchForm.value.searchText! as string)
     }
   }
+
   onReset(): void {
     this.zoneDefinitionService.ClearFilter();
   }
+
   ngOnInit(): void {
-    this.searchItems =  [
-      { name: 'Places', code: 'pm' },
-      { name: 'Zones', code: 'zone' },
-      { name: 'Locations', code: 'loc' },
-      { name: 'Layers', code: 'layers' }
+    this.searchItems = [
+      {name: 'Places', code: 'places'},
+      {name: 'Zones', code: 'zones'},
+      {name: 'Sites', code: 'sites'},
+      {name: 'Layers', code: 'layers'}
     ];
     this.zoneDefinitionService.GetData().pipe(
       takeUntil(this.destroy$)
     ).subscribe((data) => {
       console.log(data);
+      this.clearZones();
       this.data = data;
-      this.ref.markForCheck();
+
+      this.ref.detectChanges();
     })
     this.apiService.FetchData().pipe(
       takeUntil(this.destroy$),
       tap((data: ZonesDefinition) => {
         this.zoneDefinitionService.LoadingData(data);
       })
-    ).subscribe((data)=> {});
+    ).subscribe((data) => {
+    });
     this.applicationStateService.messages.pipe(
       takeUntil(this.destroy$)
     ).subscribe((message: ApplicationRequester) => {

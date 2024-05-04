@@ -7,7 +7,6 @@ import {Location} from "../models/location.model";
 export class ZoneDefinitionService {
   private data$: Subject<ZonesDefinition>= new Subject<ZonesDefinition>();
   private dataOrig!: ZonesDefinition;
-  private dataObservable: Observable<ZonesDefinition> = this.data$.asObservable();
 
   private filterSelect: {name: string, code: string} = {name: '', code: ''};
   private filterValue: string = '';
@@ -20,6 +19,8 @@ export class ZoneDefinitionService {
   public FilterData(select: {name: string, code: string}, value: string){
     this.filterSelect= select;
     this.filterValue = value;
+    console.log("set filters", this.filterSelect, this.filterValue);
+    this.data$.next(this.dataOrig)
   }
 
   public ClearFilter(): void {
@@ -28,9 +29,10 @@ export class ZoneDefinitionService {
     this.data$.next(this.dataOrig)
   }
   public GetData(): Observable<ZonesDefinition> {
-    return this.dataObservable.pipe(
+    return this.data$.pipe(
       map((data) => {
-        if (this.filterSelect.code !== '' && this.filterValue !== "" && this.filterValue.length > 2) {
+        console.log(data, this.filterSelect, this.filterValue);
+        if (this.filterSelect.code !== '' && this.filterValue !== "") {
           let items: Location[] = [];
           switch (this.filterSelect.code) {
             case "zones":
@@ -83,7 +85,7 @@ export class ZoneDefinitionService {
               break;
           }
         }
-
+        console.log("updated data", data);
         return data;
       })
     );
