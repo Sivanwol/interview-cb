@@ -17,6 +17,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {ServicesModule} from "./services/services.model";
 import {ToastModule} from "primeng/toast";
 import {RippleModule} from "primeng/ripple";
+import {InputGroupModule} from "primeng/inputgroup";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -50,7 +51,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     DropdownModule,
     ToastModule,
     InputTextModule,
-    RippleModule
+    RippleModule,
+    InputGroupModule
   ],
   bootstrap: [AppComponent]
 })

@@ -28,9 +28,13 @@
               <div class="flex align-items-center px-4 pt-3 flex-shrink-0">
                 <p-dropdown [options]="searchItems" formControlName="searchGroupSelect" optionLabel="name"></p-dropdown>
                 |
-                <input type="text" pInputText formControlName="searchText"/>
-                <p-button type="submit" pRipple  class="ml-2" [disabled]="!searchForm.valid">search</p-button>
-                <p-button type="reset" (click)="onReset" pRipple  class="ml-2" icon="pi pi-times" severity="danger"></p-button>
+                <div class="card flex flex-column md:flex-row gap-3">
+                  <p-inputGroup>
+                    <input type="text" pInputText formControlName="searchText"/>
+                    <button type="submit" pButton pRipple icon="pi pi-search"  [disabled]="!searchForm.valid"></button>
+                    <p-button type="reset" (click)="onReset" pRipple  class="ml-2" icon="pi pi-times" severity="danger"></p-button>
+                  </p-inputGroup>
+                </div>
               </div>
             </form>
             <ul class="list-none p-0 m-0 overflow-hidden">
