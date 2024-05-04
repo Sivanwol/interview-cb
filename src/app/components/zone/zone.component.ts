@@ -11,11 +11,12 @@ import {v4 as uuid} from "uuid";
 export class ZoneComponent implements OnChanges {
   @Input() name: string = "";
   @Input() icon: string = "";
-  @Input() items: Location[] = [];
+  @Input() items: Location[] | null = [];
   selectedFiles!: TreeNode[];
   treeNodes: TreeNode[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.items =(!this.items)? [] : this.items;
     if (this.items.length > 0) {
       let index =1;
       this.treeNodes = [];

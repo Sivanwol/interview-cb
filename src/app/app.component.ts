@@ -1,13 +1,14 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Sidebar} from "primeng/sidebar";
 import {ApiRequesterService} from "./services/http/ApiRequesterService";
-import {catchError, Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
-import {ZonesDefinition} from "./models/zone-definition.model";
+import {BehaviorSubject, catchError, Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
+import {ZoneDefinition, ZonesDefinition} from "./models/zone-definition.model";
 import {ApplicationStateService} from "./services/ApplicationStateService";
 import {ApplicationRequester} from "./models/ApplicationRequester";
 import {MessageService} from "primeng/api";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ZoneDefinitionService} from "./services/ZoneDefinitionService";
+import {Location} from "./models/location.model";
 
 type SearchItem = {
   name: string;
@@ -24,31 +25,13 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
   sidebarVisible: boolean = true;
   searchItems: SearchItem[] = [];
-  selectedSearch: SearchItem | null = null;
-  selectedSearchValue: string | null = null;
   private readonly destroy$ = new Subject();
-  public data$: Observable<ZonesDefinition> = new Observable<ZonesDefinition>();
-  public data: ZonesDefinition = {
-    zones: {
-      type: "zones",
-      items: []
-    },
-    placesMarks: {
-      type: "places",
-      items: []
-    },
-    sites: {
-      type: "sites",
-      items: []
-    },
-    layers: {
-      type: "layers",
-      items: []
-    }
-  };
-
+  public zones$: BehaviorSubject<Location[]> = new BehaviorSubject<Location[]>([]);
+  public sites$:BehaviorSubject<Location[]> = new BehaviorSubject<Location[]>([]);
+  public places$:BehaviorSubject<Location[]> = new BehaviorSubject<Location[]>([]);
+  public layers$:BehaviorSubject<Location[]> = new BehaviorSubject<Location[]>([]);
   searchForm = this.formBuilder.group({
-    searchGroupSelect: [null, Validators.required],
+    searchGroupSelect: [{name: 'Places', code: 'places'}, Validators.required],
     searchText: ["", Validators.required],
   })
 
@@ -56,28 +39,18 @@ export class AppComponent implements OnInit, OnDestroy {
               private applicationStateService: ApplicationStateService,
               private ref: ChangeDetectorRef,
               public zoneDefinitionService: ZoneDefinitionService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private ngZone: NgZone) {
   }
 
   private clearZones() {
-    this.data = {
-      zones: {
-        type: "zones",
-        items: []
-      },
-      placesMarks: {
-        type: "places",
-        items: []
-      },
-      sites: {
-        type: "sites",
-        items: []
-      },
-      layers: {
-        type: "layers",
-        items: []
-      }
-    };
+
+    this.ngZone.run( () => {
+      this.zones$.next([]);
+      this.sites$.next([]);
+      this.places$.next([]);
+      this.layers$.next([]);
+    });
   }
 
   ngOnDestroy(): void {
@@ -99,6 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onReset(): void {
     this.zoneDefinitionService.ClearFilter();
+    this.clearZones();
   }
 
   ngOnInit(): void {
@@ -111,11 +85,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.zoneDefinitionService.GetData().pipe(
       takeUntil(this.destroy$)
     ).subscribe((data) => {
-      console.log(data);
-      this.clearZones();
-      this.data = data;
-
-      this.ref.detectChanges();
+      console.log('rerenderer', data);
+      this.ngZone.run( () => {
+        this.zones$.next(data.zones.items);
+        this.sites$.next(data.sites.items);
+        this.layers$.next(data.layers.items);
+        this.places$.next(data.placesMarks.items);
+        this.ref.detectChanges();
+      });
     })
     this.apiService.FetchData().pipe(
       takeUntil(this.destroy$),

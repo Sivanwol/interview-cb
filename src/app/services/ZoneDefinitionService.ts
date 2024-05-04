@@ -36,7 +36,7 @@ export class ZoneDefinitionService {
           let items: Location[] = [];
           switch (this.filterSelect.code) {
             case "zones":
-              items = data.zones.items;
+              items = [...data.zones.items];
               data.layers.items = [];
               data.sites.items = [];
               data.placesMarks.items = [];
@@ -44,8 +44,8 @@ export class ZoneDefinitionService {
               for (const item of items) {
                 const filteredItems = item.items.filter((item) => item.name.includes(this.filterValue));
                 item.items = filteredItems;
-                data.zones.items.push(item);
               }
+              data.zones.items = items;
               break;
             case "layers":
               items = data.layers.items;
@@ -55,9 +55,9 @@ export class ZoneDefinitionService {
               data.zones.items = [];
               for (const item of items) {
                 const filteredItems = item.items.filter((item) => item.name.includes(this.filterValue));
-                item.items = filteredItems;
-                data.layers.items.push(item);
+                item.items = filteredItems
               }
+              data.layers.items = items;
               break;
             case "sites":
               items = data.sites.items;
@@ -67,9 +67,9 @@ export class ZoneDefinitionService {
               data.zones.items = [];
               for (const item of items) {
                 const filteredItems = item.items.filter((item) => item.name.includes(this.filterValue));
-                item.items = filteredItems;
-                data.sites.items.push(item);
+                item.items = filteredItems
               }
+              data.sites.items = items;
               break;
             case "places":
               items = data.placesMarks.items;
@@ -79,9 +79,9 @@ export class ZoneDefinitionService {
               data.zones.items = [];
               for (const item of items) {
                 const filteredItems = item.items.filter((item) => item.name.includes(this.filterValue));
-                item.items = filteredItems;
-                data.zones.items.push(item);
+                item.items = filteredItems
               }
+              data.placesMarks.items = items;
               break;
           }
         }
